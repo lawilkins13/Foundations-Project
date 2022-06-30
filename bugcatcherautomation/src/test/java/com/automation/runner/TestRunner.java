@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.poms.Login;
 import com.automation.poms.managerCreateDefect;
+import com.automation.poms.testerUpdateDefect;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -25,6 +26,7 @@ public class TestRunner {
     public static Login login;
     public static WebDriverWait wait;
     public static managerCreateDefect managerCreateDefect;
+    public static testerUpdateDefect testerUpdateDefect;
     // always create a new public static when adding new features
 
     @BeforeClass

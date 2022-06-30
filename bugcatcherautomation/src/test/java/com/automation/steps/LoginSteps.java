@@ -17,7 +17,7 @@ public class LoginSteps {
  
 @Given("The employee is on the login page")
 public void the_employee_is_on_the_login_page() {
-    TestRunner.driver.get("File://C:/VSC work/Week4/Day4/Log-automation-project/bugcatcherautomation/src/test/resources/webpages/Wayne-Enterprises-login-page.html");
+    TestRunner.driver.get("File://C:/VSC work/Week4/Day4/Log-automation-project/Foundations-Project/bugcatcherautomation/src/test/resources/webpages/Wayne-Enterprises-login-page.html");
 }
 
 @When("the employee clicks the login button")

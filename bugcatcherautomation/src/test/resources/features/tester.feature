@@ -1,10 +1,10 @@
-Feature: Tester should be able to view assigned defects, and should begin working on these defects after they have successfully logged in
+Feature: Tester should be able to enter the defectID, and should begin working on it once they have reached their homeage.
 
-Scenario: As A Tester I want to view defects assigned to me So That I can begin working on them.
+Scenario: As A Tester I want enter the defectID So That I can begin working on them.
 
-    Given The Tester successfully logs in and accesses their homepage
-    When the Tester types in the defectId assigned
-    When the Tester selects Accept or Reject
+    Given The Tester successfully reaches their homepage
+    When the Tester enters in the defectId assigned
+    When the Tester selects Accept or Decline
     When the Tester clicks the Update status button
     When the Tester Updates from Pending to Accepted
     When the Tester Fixes the defect
