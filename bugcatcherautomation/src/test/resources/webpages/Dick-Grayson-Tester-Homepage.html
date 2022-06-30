@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dick Grayson's Homepage</title>
+</head>
+<body>
+    <h1>Hello, Welcome Mr. Grayson</h1>
+    <h4>There has been a Defect detected, and assigned to you</h4>
+
+    <p>Please selct the actions you would like to take:</p>
+
+    <p>DefectId number:</p>
+    <input type="number" id="defectID">
+    
+     
+
+
+    
+
+     <p>Accept or Decline Defect:</p>
+     <label>Please choose an option:</label>
+     <select id="Accept-or-Reject">
+        <option value="Accepted">Accept</option>
+        <option value="Declined">Decline</option>
+     </select>
+     <table id="tableOne"></table>
+     <button onclick="updateDefect()">Update status</button>
+     <button onclick="updateBug()">Update Bug</button>
+     
+     
+    
+ 
+    
+    
+    <h4>Please Click to Logout:</h4>
+    <button onclick="Logout()" id="logout">No more Enemies!</button>
+
+    
+
+</body>
+<script>
+    const Update = document.getElementById("Accept-or-Reject")
+    const defectID = document.getElementById("defectID") 
+    const table = document.getElementById("tableOne")
+    const logOut = document.getElementById("logout")
+
+    function Logout(){
+        let result = confirm("All the Defects have been completed");
+        if(result === true){
+            alert("have a nice day");
+            window.location.href = "Wayne-Enterprises-login-page.html"
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    async function getDefect(){
+        let httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/15/defects`)
+        console.log(httpResponse)
+        let responseBody = await httpResponse.json();
+
+        if(httpResponse.status === 200){
+            console.log(responseBody)
+            alert("you have a few Defects assigned to you")
+        }
+    } 
+    getDefect() // this just called the defects
+
+    async function updateDefect(){
+        let updateInfo = {
+            status: Update.value
+        }
+        let updateJSON = JSON.stringify(updateInfo);
+
+        let config = {
+            method: "PATCH",
+            headers:{'Content-type' : "application/json"},
+            body: updateJSON
+        };
+
+        let httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/15/defects/${defectID.value}`, config)
+        console.log(httpResponse.status)
+
+        if(httpResponse.status === 204){
+            if(Update.value === "Accepted"){
+                let additionalTh = document.createElement("th")
+                additionalTh.innerHTML =
+                `
+                <th>What would you like to do?</th>
+                `
+                table.appendChild(additionalTh)
+                let additionalTr = document.createElement("td")
+                additionalTr.innerHTML =
+                `
+                <td>
+                    <select id = "Fix-shelve-reject">
+                        <option value = "Fixed">Terminated</option>
+                        <option value = "Shelved">Address it later</option> 
+                        <option value = "Rejected">Doesn't matter</option> 
+                    </select>
+                </td>
+                `
+                table.appendChild(additionalTr);
+                backupUpdate = document.getElementById("Fix-shelve-reject") 
+                 
+                
+            } else if(Update.value === "Declined"){
+                let result = confirm("It'll work itself out")
+                if(result === true){
+                    window.location.href = "Wayne-Enterprises-login-page.html"
+                }
+            }
+        }
+    }
+    
+
+    async function updateBug(){
+        let updateInfo = {
+            status: backupUpdate.value
+        }
+        letupdateJSON = JSON.stringify(updateInfo)
+
+        let config = {
+            method: "PATCH",
+            headers:{'Content-type' : "application/json"},
+            body: letupdateJSON
+        };
+
+        let httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/15/defects/${defectID.value}`, config)
+        console.log(httpResponse.status)
+
+        if(httpResponse.status === 204){
+            if(backupUpdate.value === "Fixed"){
+                let result = confirm("Finally no more Joker!");
+                if(result === true){
+                    window.location.href = "Dick-Grayson-Tester-Homepage.html"
+                    return true;
+                }else{
+                    return false;
+                }
+            }else if(backupUpdate.value === "Rejected"){
+                let result = confirm("this is no big deal..");
+                if(result === true){
+                    window.location.href = "Dick-Grayson-Tester-Homepage.html"
+                    return true;
+                } else{
+                    return false;
+                }
+            }else if(backupUpdate.value === "Shelved"){
+                let result = confirm("we'll come back to it later");
+                if(result === true){
+                    window.location.href = "Dick-Grayson-Tester-Homepage.html"
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+    }
+}   
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>WELCOME TO WAYNE ENTERPRISES</h1>
+    <h4>Please login below to proceed:</h4>
+
+    <p>Please list your</p>
+    <ul>
+        <li>Username</li>
+        <li>Password</li>
+    </ul>
+
+    <p>Username</p>
+    <input type="Text" id="username">
+
+    <p>Password</p>
+    <input type="Password" id="password">
+
+    <p>Please click to login:</p>
+    <button onclick="login()">Vengeance</button>
+
+    
+    
+    
+</body>
+<script>
+    async function login(){
+        let loginInfo = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        }
+        let loginJSON = JSON.stringify(loginInfo);
+
+        let config = {
+            method: "PATCH",
+            headers:{'Content-type' : "application/json"},
+            body: loginJSON
+        }
+
+        let httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/15/login",config);
+
+        if(httpResponse.status === 200){
+            let responseBody = await httpResponse.json();
+
+            if(responseBody.role === "Manager"){
+                window.location.href = "Bruce-Wayne-manager-homepage.html"
+            } else{
+                window.location.href = "Dick-Grayson-Tester-Homepage.html"
+            }
+        } else {
+            let responseBody = await httpResponse.json();
+            alert(responseBody.detail);
+        }
+    }
+</script>
+</html>

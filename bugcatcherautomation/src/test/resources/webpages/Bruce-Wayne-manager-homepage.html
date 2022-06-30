@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bruce Waynes Homepage</title>
+</head>
+<body>
+    <h1>Hello, Welcome Mr. Wayne</h1>
+    <h4>It looks like we have found a defect within our systems</h4>
+
+    <h5>please give this defect a name:</h5>
+
+    
+    <p>Defect name:</p>
+    <input type="text" id="Joker's Back">
+
+
+    
+    
+    <h5>Please specify an Assigned Tester:</h5>
+    
+    
+    <p>Assigned Tester:</p>
+    <input type="text" id="Dick Grayson" >
+
+    <p>Please click below to assign Tester:</p>
+    <button onclick="Assign()">Assign</button>
+
+    
+</body>
+<script>
+     async function Assign(){
+        let DefectInfo = {
+        "assignedTo": document.getElementById("Dick Grayson").value,
+        "dateReported": 0,
+        "desc": document.getElementById("Joker's Back").value,
+        "stepsToReproduce": "string",
+        "severity": "Low",
+        "priority": "Low"
+}
+        let DefectNameJSON = JSON.stringify(DefectInfo);
+
+        let config = {
+            method: "POST",
+            headers:{'Content-type' : "application/json"},
+            body: DefectNameJSON
+        }
+        let httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/15/defects", config)
+
+        // when i sign into the manager page, be sure to use Dick Graysons username: flyingG
+        
+        if(httpResponse.status === 201){ // 201 is the message we get for getting the defects
+            let responseBody = await httpResponse.json();
+            alert("you have successfully Assigned the defects to Mr.Grayson")
+        } else{
+            alert("these Defects have been assigned to Mr. Grayson!")
+        }
+       
+    
+     }
+</script>
+</html>
