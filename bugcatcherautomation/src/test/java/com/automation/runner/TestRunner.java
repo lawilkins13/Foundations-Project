@@ -11,7 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.poms.Login;
 import com.automation.poms.managerCreateDefect;
-import com.automation.poms.testerUpdateDefect;
+import com.automation.poms.TesterAcceptDefect;
+import com.automation.poms.TesterDeclineDefect;
+import com.automation.poms.TesterFixDefect;
+import com.automation.poms.TesterLogout;
+import com.automation.poms.TesterRejectDefect;
+import com.automation.poms.TesterShelveDefect;
+
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -26,7 +32,12 @@ public class TestRunner {
     public static Login login;
     public static WebDriverWait wait;
     public static managerCreateDefect managerCreateDefect;
-    public static testerUpdateDefect testerUpdateDefect;
+    public static TesterAcceptDefect testerAcceptDefect;
+    public static TesterDeclineDefect testerDeclineDefect;
+    public static TesterFixDefect testerFixDefect;
+    public static TesterRejectDefect testerRejectDefect;
+    public static TesterShelveDefect testerShelveDefect;
+    public static TesterLogout testerLogout;
     // always create a new public static when adding new features
 
     @BeforeClass
@@ -36,6 +47,14 @@ public class TestRunner {
         login = new Login(driver);
         wait = new WebDriverWait(driver, 2);
         managerCreateDefect = new managerCreateDefect(driver);
+        testerLogout= new TesterLogout(driver);
+        testerAcceptDefect = new TesterAcceptDefect(driver);
+        testerDeclineDefect = new TesterDeclineDefect(driver);
+        testerFixDefect = new TesterFixDefect(driver);
+        testerRejectDefect = new TesterRejectDefect(driver);
+        testerShelveDefect = new TesterShelveDefect(driver);
+
+
     }
 
     @AfterClass 
